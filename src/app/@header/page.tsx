@@ -97,3 +97,5 @@ export const HeaderPage = () => {
     </div>
   );
 };
+
+export default HeaderPage;
