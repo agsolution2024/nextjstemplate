@@ -28,7 +28,7 @@ import { MenuMobile } from "@/app/@header/menu-mobile";
 export const HeaderPage = () => {
   return (
     <div className="">
-      <header className="flex h-20 gap-2 border-b-2 bg-background px-4 md:px-6 ">
+      <header className="flex h-20 gap-2 border-b-2 bg-background px-4 md:px-6 fixed w-full top-0 z-50">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link href="/" className="">
             <Image src={Logo} alt="rrhi-logo" className="w-80 h-auto" />
@@ -40,22 +40,16 @@ export const HeaderPage = () => {
             Home
           </Link>
           <Link
-            href="/contactus"
+            href="/orders"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Contact&nbsp;Us
+            Orders
           </Link>
           <Link
-            href="/aboutus"
+            href="/user-management"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            About&nbsp;Us
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Docs
+            User&nbsp;Management
           </Link>
         </nav>
         <MenuMobile />

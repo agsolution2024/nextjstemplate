@@ -13,7 +13,7 @@ import ToastButton from "@/app/home/toastbutton";
 
 export default function TableButton() {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center px-7">
       <div className="ml-auto flex items-center gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

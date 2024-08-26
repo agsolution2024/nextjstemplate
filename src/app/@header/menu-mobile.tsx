@@ -21,13 +21,13 @@ export const MenuMobile = () => {
       <SheetContent side="left">
         <nav className="grid gap-6 text-lg font-medium">
           <Link
-            href="#"
+            href="/"
             className="flex items-center gap-2 text-lg font-semibold"
           >
             <Image src={Logo} alt="rrhi-logo" className="w-36 h-auto" />
           </Link>
           <Link
-            href="#"
+            href="/"
             className="text-foreground transition-colors hover:text-foreground"
           >
             Home
@@ -36,13 +36,13 @@ export const MenuMobile = () => {
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Contact Us
+            Orders
           </Link>
           <Link
-            href="#"
+            href="/user-management"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            About Us{" "}
+            User&nbsp;Management{" "}
           </Link>
           <Link
             href="#"

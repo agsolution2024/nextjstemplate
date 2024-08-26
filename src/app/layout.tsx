@@ -4,7 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { HeaderPage } from "@/app/@header/page";
+import { HeaderPage } from "./@header/page";
 import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
@@ -37,7 +37,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <HeaderPage />
-          <div className="flex min-h-screen w-full flex-col">{children}</div>
+          <div className="flex min-h-screen w-full flex-col mt-20">
+            {children}
+          </div>
         </ThemeProvider>
         <Toaster />
       </body>
