@@ -33,7 +33,7 @@ export const MenuMobile = () => {
             Home
           </Link>
           <Link
-            href="#"
+            href="/orders"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Orders
@@ -43,12 +43,6 @@ export const MenuMobile = () => {
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             User&nbsp;Management{" "}
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Docs{" "}
           </Link>
         </nav>
       </SheetContent>
