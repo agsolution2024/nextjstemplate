@@ -2,7 +2,7 @@
 import Logo from "@/assets/images/rrhi_logo.png";
 import Image from "next/image";
 import Link from "next/link";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,7 +30,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import ModeTag from "./statusTag";
-
+import { Input } from "@/components/ui/input";
 interface Order {
   id: string;
   orderNo: string;
@@ -124,6 +124,18 @@ const Page: React.FC = () => {
   return (
     <>
       <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <div className="w-full flex-1">
+          <form>
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search Order Number or Transaction Id"
+                className="w-full appearance-none bg-background pl-8 shadow-none "
+              />
+            </div>
+          </form>
+        </div>
         <Card x-chunk="dashboard-05-chunk-3">
           <CardHeader className="px-7">
             <CardTitle>List of Orders</CardTitle>

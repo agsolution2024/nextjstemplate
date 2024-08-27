@@ -1,38 +1,19 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import {
   ChevronLeft,
-  PlusCircle,
-  Upload,
   ChevronRight,
-  CreditCard,
-  ShoppingCart,
-  ShoppingBag,
-  XCircle,
   Copy,
-  MoreHorizontal,
   MoreVerticalIcon,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -41,8 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Textarea } from "@/components/ui/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Pagination,
   PaginationContent,
@@ -50,22 +29,14 @@ import {
 } from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
 import ModeTag from "@/app/orders/statusTag";
-import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Order {
   id: string;
@@ -127,13 +98,22 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
   }, [orderId]);
 
   if (!order) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-row min-h-screen justify-center items-center">
+        <Skeleton className="h-24 w-24 rounded-full" />
+        <div className="space-y-2">
+          <Skeleton className="h-10 w-[800px]" />
+          <Skeleton className="h-10 w-[750px]" />
+          <Skeleton className="h-10 w-[700px]" />
+        </div>
+      </div>
+    );
   }
 
   return (
     <>
-      <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className="flex items-center gap-4 mr-8 ml-8">
+      <div className="flex flex-1 flex-col">
+        <div className="flex items-center gap-4 mr-8 ml-8 p-5">
           <Button variant="outline" size="icon" className="h-7 w-7">
             <ChevronLeft className="h-4 w-4" />
             <span className="sr-only">Back</span>
@@ -158,9 +138,9 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
           <div className="items-center gap-2 md:ml-auto md:flex">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="default">
-                  More Action{" "}
-                  <MoreVerticalIcon className="h-7 w-7 text-red-600" />
+                <Button variant="ghost" className="hover:transaparent">
+                  More Action
+                  <MoreVerticalIcon className="h-4 w-4 text-red-600" />
                 </Button>
               </DropdownMenuTrigger>
 
@@ -173,7 +153,6 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
           </div>
         </div>
 
-        <div className="flex flex-row ..."></div>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
@@ -279,23 +258,33 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                   <CardTitle className="text-lg">Order History</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Product Name</TableHead>
-                        <TableHead>Quantity</TableHead>
-                        <TableHead>Price</TableHead>
-                        <TableHead>Total Price</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableCell>Bounty Fresh Chicken Breast</TableCell>
-                      <TableCell>1</TableCell>
-                      <TableCell>789</TableCell>
-                      <TableCell>₱222.00 x 1</TableCell>
-                      <TableCell>₱222.00</TableCell>
-                    </TableBody>
-                  </Table>
+                  <div className="relative space-y-4">
+                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                    <div className="flex items-center">
+                      <div className="relative z-10 w-2.5 h-2.5 bg-blue-500 rounded-full mr-4"></div>
+                      <div className="flex-1">
+                        <p className="font-medium">Handled By Seller</p>
+                        <p className="text-sm text-gray-500">
+                          2024-08-27 15:38:08
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-500">16 Items</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="relative z-10 w-2.5 h-2.5 bg-blue-500 rounded-full mr-4"></div>
+                      <div className="flex-1">
+                        <p className="font-medium">Delivery Order Create</p>
+                        <p className="text-sm text-gray-500">
+                          2024-08-27 15:38:08
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-500">16 Items</p>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>

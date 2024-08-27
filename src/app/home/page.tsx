@@ -21,7 +21,7 @@ import { HomeCards } from "@/app/home/cards";
 const Dashboard = () => {
   return (
     <>
-      <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 mt-5">
+      <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 -mt-5">
         <TableButton />
         <HomeCards />
         <div className="px-7">

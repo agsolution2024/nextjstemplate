@@ -29,8 +29,15 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  Pie,
+  PieChart,
+} from "recharts";
 import { Separator } from "@/components/ui/separator";
 
 const chartDataOrders = [
@@ -62,6 +69,39 @@ const chartConfigOrders = {
   desktop: {
     label: "Count",
     color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
+
+const chartData = [
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+];
+const chartConfig = {
+  visitors: {
+    label: "Payment Method - ",
+  },
+  chrome: {
+    label: "Gcash",
+    color: "hsl(var(--chart-1))",
+  },
+  safari: {
+    label: "COD",
+    color: "hsl(var(--chart-2))",
+  },
+  firefox: {
+    label: "PAY_LATER",
+    color: "hsl(var(--chart-3))",
+  },
+  edge: {
+    label: "MIXEDCARD",
+    color: "hsl(var(--chart-4))",
+  },
+  other: {
+    label: "PAYMAYA",
+    color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
 
@@ -197,13 +237,44 @@ export function HomeCards() {
           </Card>
         </div>
       </div>
+
       <div>
         <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+          <CardHeader className="items-center pb-0">
+            <CardTitle className="text-sm">Payment Method</CardTitle>
+          </CardHeader>
           <CardContent className="p-6 text-sm">
+            <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
+              <CardContent className="p-6 text-sm">
+                <ChartContainer
+                  config={chartConfig}
+                  className="mx-auto aspect-square max-h-[250px]"
+                >
+                  <PieChart>
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent nameKey="visitors" hideLabel />
+                      }
+                    />
+                    <Pie data={chartData} dataKey="visitors">
+                      <LabelList
+                        dataKey="browser"
+                        className="fill-background"
+                        stroke="none"
+                        fontSize={7}
+                        formatter={(value: keyof typeof chartConfig) =>
+                          chartConfig[value]?.label
+                        }
+                      />
+                    </Pie>
+                  </PieChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+            <br />
             <div className="grid gap-3">
               <div className="font-semibold">Recent Activity</div>
               <Separator />
-
               <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
                   <span className="">
@@ -226,24 +297,6 @@ export function HomeCards() {
                 <li className="flex items-center justify-between">
                   <span className="">
                     Order # 889438310968427 change status from Picked to Packed
-                    <br />
-                    <span className="text-muted-foreground text-xs ">
-                      November 23, 2023
-                    </span>
-                  </span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="">
-                    Order#884172030095653 change status from Packed to Delivered
-                    <br />
-                    <span className="text-muted-foreground text-xs ">
-                      November 23, 2023
-                    </span>
-                  </span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="">
-                    User remove the SKU 158539 to Order#884172030095653
                     <br />
                     <span className="text-muted-foreground text-xs ">
                       November 23, 2023

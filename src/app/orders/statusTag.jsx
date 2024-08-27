@@ -146,7 +146,11 @@ const ModeTag = ({ type }) => {
     }
     const tags = tagList[type] || tagList["default"];
     return (
-      <Badge variant="outline" className="ml-auto sm:ml-0 " style={tags.style}>
+      <Badge
+        variant="outline"
+        className="ml-auto sm:ml-0 badgeStatus"
+        style={tags.style}
+      >
         {tags.label}
       </Badge>
     );
