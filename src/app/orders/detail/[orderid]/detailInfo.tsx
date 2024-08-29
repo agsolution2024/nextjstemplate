@@ -37,6 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 interface Order {
   id: string;
@@ -53,6 +54,11 @@ interface Order {
   eta: string;
   packerLocalDateTime: string | null;
   customerRemarks: string | null;
+  address: string | null;
+  store: string | null;
+  receiver: string | null;
+  mobile: string | null;
+  email: string | null;
 }
 interface ApiResponse {
   code: number;
@@ -115,7 +121,9 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-4 mr-8 ml-8 p-5">
           <Button variant="outline" size="icon" className="h-7 w-7">
-            <ChevronLeft className="h-4 w-4" />
+            <Link href="/orders">
+              <ChevronLeft className="h-4 w-4" />
+            </Link>
             <span className="sr-only">Back</span>
           </Button>
           <p className="flex-1 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
@@ -303,7 +311,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Transaction</dt>
                         <dd>
-                          884172030095653{" "}
+                          {order.rtiOrderId}
                           <Button
                             size="icon"
                             variant="outline"
@@ -318,7 +326,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Store Origin</dt>
                         <dd>
-                          RS RP MetroEast{" "}
+                          {order.store}
                           <Button
                             size="icon"
                             variant="outline"
@@ -356,7 +364,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="grid gap-3">
                       <address className="grid gap-0.5 not-italic text-muted-foreground">
-                        <span>Liam Johnson</span>
+                        <span>Liam Johnson </span>
                         <span>1234 Main St.</span>
                         <span>Anytown, CA 12345</span>
                       </address>
@@ -380,18 +388,18 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                     <dl className="grid gap-3">
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Customer</dt>
-                        <dd>Liam Johnson</dd>
+                        <dd>{order.receiver}</dd>
                       </div>
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Email</dt>
                         <dd>
-                          <a href="mailto:">liam@acme.com</a>
+                          <a href="mailto:">{order.email}</a>
                         </dd>
                       </div>
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Phone</dt>
                         <dd>
-                          <a href="tel:">+1 234 567 890</a>
+                          <a href="tel:">{order.mobile}</a>
                         </dd>
                       </div>
                     </dl>
@@ -411,9 +419,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                   <div className="grid grid-cols-1 gap-4">
                     <div className="grid gap-3">
                       <address className="grid gap-0.5 not-italic text-muted-foreground">
-                        <span>
-                          Alecon homes,Apitong, Caloocan City, Philippines
-                        </span>
+                        <span>{order.address}</span>
                       </address>
                     </div>
                   </div>
