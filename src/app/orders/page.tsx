@@ -63,7 +63,7 @@ const Page: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
-    fetch("https://dev-api.gocart.ph/s2/api/v1/order/list", {
+    fetch("https://dev-api.rrhiapps.ph/s2/api/v1/order/list", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Page: React.FC = () => {
           type: 1,
           value: ["2024-06-30", "2024-07-06"],
         },
-        beginDate: "2024-06-30",
+        beginDate: "2024-01-30",
         endDate: "2024-08-30",
       }),
     })

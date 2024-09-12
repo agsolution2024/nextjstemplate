@@ -39,6 +39,35 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 
+interface ProductItem {
+  id: number;
+  name: string;
+  itemCode: number;
+  category: string;
+  brand: string;
+  qty: number;
+  availableQty: number;
+  price: number;
+  scanImage: string | null;
+  status: boolean;
+  replace: string | null;
+  isOos: boolean | null;
+  cancelByCustomer: boolean | null;
+  freeItemQty: number | null;
+  weighted: boolean;
+  actualWeight: number | null;
+  actualPrice: number | null;
+  totalPricePerItem: number;
+  discountedPrice: number | null;
+}
+interface Movement {
+  statusDesc: string;
+  time: string | null;
+  newTime: string;
+  newDate: string;
+  operatorUserName: string;
+}
+
 interface Order {
   id: string;
   orderNo: string;
@@ -59,6 +88,8 @@ interface Order {
   receiver: string | null;
   mobile: string | null;
   email: string | null;
+  productItems: ProductItem[];
+  movementList: Movement[];
 }
 interface ApiResponse {
   code: number;
@@ -77,6 +108,7 @@ type OrderDetailsProps = {
 
 const OrderDetails = ({ orderId }: OrderDetailsProps) => {
   const [order, setOrder] = useState<Order | null>(null);
+  const [data, setData] = useState<ApiResponse["data"] | null>(null);
   const { toast } = useToast();
 
   const showToast = () => {
@@ -91,7 +123,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
     const fetchOrder = async () => {
       try {
         const response = await fetch(
-          `https://dev-api.gocart.ph/s2/api/v1/OmsOrder/fulfillmentDetail?orderId=${orderId}`
+          `https://dev-api.rrhiapps.ph/s2/api/v1/OmsOrder/fulfillmentDetail?orderId=${orderId}`
         );
         const data = await response.json();
         setOrder(data.data);
@@ -179,11 +211,16 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableCell>Bounty Fresh Chicken Breast</TableCell>
-                      <TableCell>1</TableCell>
-                      <TableCell>789</TableCell>
-                      <TableCell>₱222.00 x 1</TableCell>
-                      <TableCell>₱222.00</TableCell>
+                      {order.productItems.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell>{item.name}</TableCell>
+                          <TableCell>{item.qty}</TableCell>
+                          <TableCell>₱{item.price.toFixed(2)}</TableCell>
+                          <TableCell>
+                            ₱{item.totalPricePerItem.toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </CardContent>
@@ -311,7 +348,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Transaction</dt>
                         <dd>
-                          {order.rtiOrderId}
+                          {order.rtiOrderId}{" "}
                           <Button
                             size="icon"
                             variant="outline"
@@ -326,7 +363,7 @@ const OrderDetails = ({ orderId }: OrderDetailsProps) => {
                       <div className="flex items-center justify-between">
                         <dt className="text-muted-foreground">Store Origin</dt>
                         <dd>
-                          {order.store}
+                          {order.store}{" "}
                           <Button
                             size="icon"
                             variant="outline"
